@@ -68,10 +68,10 @@ app.get('/api/dashboard', jwtMW, (req, res) => {
     });
 });
 
-app.get('/api/prices', jwtMW, (req, res) => {
+app.get('/api/settings', jwtMW, (req, res) => {
     res.json({
         success: true,
-        myContent: 'this is the price $3.99'
+        myContent: 'this is the settings page'
     });
 });
 

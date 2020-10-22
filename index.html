@@ -27,6 +27,7 @@
         <div>
             <button onclick = "login()">Login</button>
             <button onclick = "getDashboard()">Get Dashboard</button>
+            <button onclick = "getSettings()">Settings</button>
         </div>
     </main>
 </div>
@@ -60,17 +61,26 @@
             if(res && res.data && res.data.success) {
                 document.querySelector('h1.row').innerHTML = 'Dashboard';
                 document.querySelector('main').innerHTML = res.data.myContent;
+                history.pushState(null, "Dashboard Page", "dashboard");
             }
         })
     }
 
-    function onLoad() {
+    function getSettings() {
         const token = localStorage.getItem('jwt');
-        if(token) {
-            getDashboard();
-        }
+        axios.get('/api/settings', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => {
+            if(res && res.data && res.data.success) {
+                document.querySelector('h1.row').innerHTML = 'Settings';
+                document.querySelector('main').innerHTML = res.data.myContent;
+                history.pushState(null, "Settings Page", "settings");
+            }
+        })
     }
-    onLoad();
+    
 </script>
     
 </body>
